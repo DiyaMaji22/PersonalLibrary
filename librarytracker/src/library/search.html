@@ -381,13 +381,13 @@
             if (authorInfo) {
                 callback(authorInfo.bio, authorInfo.bookCount);
             } else {
-                // Try to fetch from Wikipedia API as fallback
+                
                 fetchAuthorDetails(authorName, callback);
             }
         }
 
         function fetchAuthorDetails(authorName, callback) {
-            // Simplified Wikipedia API call for author information
+           
             const xhr = new XMLHttpRequest();
             const url = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(authorName)}`;
             
