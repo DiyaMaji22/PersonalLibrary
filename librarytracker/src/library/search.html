@@ -549,9 +549,9 @@
             }
         }
 
-        // Generate default genres (fallback)
+       
         function generateGenres() {
-            // This is a fallback function - genres are now primarily updated via API
+           
             const genres = ['Mystery', 'Fiction', 'Classic'];
             const genreContainer = document.getElementById('genreContainer');
             
@@ -566,14 +566,14 @@
             }
         }
 
-        // Legacy functions for compatibility
+        
         function searchBook(title, author = '') {
             const query = author ? `${title} ${author}` : title;
             searchAndLoadBook(query);
         }
 
         function updateBookData(bookData) {
-            // Legacy function - functionality moved to updateBookDataFromAPI
+            
             if (bookData.volumeInfo) {
                 updateBookDataFromAPI(bookData);
             }
