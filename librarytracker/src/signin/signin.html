@@ -1,199 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vintage Sign-Up Form</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@400;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'cinzel': ['Cinzel', 'serif'],
+                        'cormorant': ['Cormorant Garamond', 'serif']
+                    },
+                    colors: {
+                        'vintage-cream': '#f5f1e6',
+                        'vintage-paper': '#f9f5eb',
+                        'vintage-brown': '#8b4513',
+                        'vintage-dark': '#5d2916',
+                        'vintage-text': '#3e352e',
+                        'vintage-border': '#d4c9ad',
+                        'vintage-muted': '#6d4c3d',
+                        'vintage-input': '#fcf9f3'
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
         body {
-            background: #f5f1e6 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23e8dfc8"/><path d="M0 0 L100 100 M100 0 L0 100" stroke="%23d4c9ad" stroke-width="0.5"/></svg>');
-            font-family: 'Cormorant Garamond', serif;
-            color: #3e352e;
-            line-height: 1.6;
+            background: #f5f1e6 url('../../public/assets/books/bgimages/brownbgm.jpg') no-repeat center center;
+            background-size: cover;
         }
-        
-        .vintage-container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 1rem;
-        }
-        
-        .vintage-card {
-            background: #f9f5eb;
-            border: 8px double #8b4513;
-            border-radius: 4px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), inset 0 0 20px rgba(139, 69, 19, 0.1);
-            position: relative;
-            overflow: hidden;
-            padding: 2rem;
-        }
-        
-        .vintage-card:before {
+
+        .vintage-card-pattern:before {
             content: "";
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><rect width="200" height="200" fill="none" stroke="%23d4c9ad" stroke-width="0.5" stroke-dasharray="4,4"/></svg>');
+            
             opacity: 0.15;
             pointer-events: none;
         }
-        
-        .vintage-header {
-            text-align: center;
-            margin-bottom: 2rem;
-            position: relative;
-            padding-bottom: 1rem;
-        }
-        
-        .vintage-header:after {
+
+        .vintage-header-line:after {
             content: "";
             position: absolute;
             bottom: 0;
             left: 25%;
             right: 25%;
             height: 2px;
-            background: linear-gradient(to right, transparent, #8b4513, transparent);
+            background: linear-gradient(to right, transparent, #822c0a, transparent);
         }
-        
-        .vintage-header h1 {
-            font-family: 'Cinzel', serif;
-            font-size: 2.5rem;
-            color: #5d2916;
-            letter-spacing: 1px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-        }
-        
-        .vintage-header p {
-            font-size: 1.2rem;
-            font-style: italic;
-            color: #6d4c3d;
-        }
-        
-        .form-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-        }
-        
-        .form-section {
-            flex: 1;
-            min-width: 300px;
-        }
-        
-        .image-section {
-            flex: 1;
-            min-width: 300px;
-            border-left: 1px solid #d4c9ad;
-            padding-left: 2rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-            position: relative;
-        }
-        
-        .form-group label {
-            display: block;
-            font-family: 'Cinzel', serif;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            color: #5d2916;
-            letter-spacing: 0.5px;
-        }
-        
-        .vintage-input {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            border: 2px solid #d4c9ad;
-            background: #fcf9f3;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
-            color: #3e352e;
-            border-radius: 2px;
-            transition: all 0.3s;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
-        }
-        
-        .vintage-input:focus {
-            outline: none;
-            border-color: #8b4513;
-            box-shadow: 0 0 5px rgba(139, 69, 19, 0.3);
-            background: #fff;
-        }
-        
-        .vintage-input::placeholder {
-            color: #a89a87;
-            font-style: italic;
-        }
-        
-        .vintage-button {
-            width: 100%;
-            padding: 1rem;
-            background: linear-gradient(to bottom, #8b4513, #5d2916);
-            border: none;
-            color: #f9f5eb;
-            font-family: 'Cinzel', serif;
-            font-size: 1.2rem;
-            letter-spacing: 1px;
-            border-radius: 2px;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 3px 5px rgba(0,0,0,0.1);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .vintage-button:hover {
-            background: linear-gradient(to bottom, #9c5a2d, #6d3a1f);
-            box-shadow: 0 5px 8px rgba(0,0,0,0.15);
-        }
-        
-        .vintage-button:before {
+
+        .vintage-button-shimmer:before {
             content: "";
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: 0.5s;
         }
-        
-        .vintage-button:hover:before {
+
+        .vintage-button-shimmer:hover:before {
             left: 100%;
         }
-        
-        .vintage-image {
-            width: 100%;
-            height: 400px;
-            border: 8px double #8b4513;
-            border-radius: 2px;
-            overflow: hidden;
-            position: relative;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .vintage-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: sepia(0.4) contrast(1.1) brightness(0.95);
-        }
-        
-        .vintage-image:after {
+
+        .vintage-image-overlay:after {
             content: "";
             position: absolute;
             top: 0;
@@ -203,147 +85,117 @@
             background: linear-gradient(45deg, transparent 50%, rgba(139, 69, 19, 0.05) 50%);
             pointer-events: none;
         }
-        
-        .vintage-image:before {
+
+        .vintage-image-pattern:before {
             content: "";
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="%238b4513" stroke-width="0.5" stroke-dasharray="8,8" opacity="0.2"/></svg>');
-            pointer-events: none;
-        }
-        
-        .vintage-footer {
-            text-align: center;
-            margin-top: 2rem;
-            padding: 1rem;
-            background: rgba(212, 201, 173, 0.3);
-            border-top: 1px solid #d4c9ad;
-            font-size: 1.1rem;
-            border-radius: 2px;
-        }
-        
-        .vintage-footer b {
-            font-weight: 600;
-            color: #5d2916;
-        }
-        
-        .vintage-footer u {
-            text-decoration: none;
-            border-bottom: 1px solid #8b4513;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .vintage-footer u:hover {
-            color: #8b4513;
-            border-bottom: 2px solid #8b4513;
-        }
-        
-        #message {
-            margin-top: 1.5rem;
-            padding: 1rem;
-            border-radius: 2px;
-            text-align: center;
-            font-size: 1.1rem;
-            display: none;
-        }
-        
-        .success {
-            background-color: rgba(143, 188, 143, 0.3);
-            border: 1px solid #8fbc8f;
-            color: #2e5e2e;
-        }
-        
-        .error {
-            background-color: rgba(205, 92, 92, 0.3);
-            border: 1px solid #cd5c5c;
-            color: #8b3a3a;
-        }
-        
-        .vintage-decoration {
-            position: absolute;
-            font-size: 1.5rem;
-            color: #8b4513;
-            opacity: 0.2;
-        }
-        
-        .decoration-1 { top: 10px; left: 10px; transform: rotate(-15deg); }
-        .decoration-2 { top: 10px; right: 10px; transform: rotate(15deg); }
-        .decoration-3 { bottom: 10px; left: 10px; transform: rotate(15deg); }
-        .decoration-4 { bottom: 10px; right: 10px; transform: rotate(-15deg); }
-        
-        @media (max-width: 768px) {
-            .image-section {
-                border-left: none;
-                border-top: 1px solid #d4c9ad;
-                padding-left: 0;
-                padding-top: 2rem;
-            }
             
-            .vintage-image {
-                height: 300px;
-            }
+            pointer-events: none;
         }
     </style>
 </head>
-<body>
+
+<body class="font-cormorant text-vintage-text leading-relaxed w-full min-h-screen overflow-hidden">
     <!-- Back Navigation -->
-    <div style="position: fixed; top: 20px; left: 20px; z-index: 1000;">
-        <a href="../../index.html" style="display: flex; align-items: center; gap: 8px; padding: 12px 16px; background: rgba(249, 245, 235, 0.95); border: 2px solid #8b4513; border-radius: 4px; text-decoration: none; color: #5d2916; font-family: 'Cinzel', serif; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" onmouseover="this.style.background='rgba(139, 69, 19, 0.1)'" onmouseout="this.style.background='rgba(249, 245, 235, 0.95)'">
+    <div class="fixed top-5 left-5 z-50">
+        <a href="../../index.html"
+            class="flex items-center gap-2 px-4 py-3 bg-vintage-paper bg-opacity-95 border-2 border-vintage-brown rounded font-cinzel font-semibold text-vintage-dark no-underline transition-all duration-300 shadow-lg hover:bg-amber-100">
             <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                <path fill-rule="evenodd"
+                    d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
             </svg>
             Back to Library
         </a>
     </div>
-    
-    <div class="vintage-container">
-        <div class="vintage-card">
-            <i class="fas fa-feather-alt vintage-decoration decoration-1"></i>
-            <i class="fas fa-leaf vintage-decoration decoration-2"></i>
-            <i class="fas fa-feather vintage-decoration decoration-3"></i>
-            <i class="fas fa-seedling vintage-decoration decoration-4"></i>
-            
-            <div class="vintage-header">
-                <h1>Create Account</h1>
-                <p>Join our creative fellowship of artisans and dreamers</p>
+
+    <div class="max-w-6xl mx-auto my-8 p-4">
+        <div
+            class="vintage-card-pattern relative bg-vintage-paper border-8 border-double border-vintage-brown rounded shadow-2xl shadow-black shadow-opacity-10 overflow-hidden p-8">
+           
+            <i
+                class="fas fa-feather-alt absolute top-3 left-3 text-2xl text-vintage-brown opacity-20 transform -rotate-12"></i>
+            <i
+                class="fas fa-leaf absolute top-3 right-3 text-2xl text-vintage-brown opacity-20 transform rotate-12"></i>
+            <i
+                class="fas fa-feather absolute bottom-3 left-3 text-2xl text-vintage-brown opacity-20 transform rotate-12"></i>
+            <i
+                class="fas fa-seedling absolute bottom-3 right-3 text-2xl text-vintage-brown opacity-20 transform -rotate-12"></i>
+
+            <!-- Header -->
+            <div class="vintage-header-line relative text-center mb-8 pb-4">
+                <h1 class="font-cinzel text-4xl text-vintage-dark tracking-wide text-shadow-sm">Create Account</h1>
+                <p class="text-xl italic text-vintage-muted">Join our creative fellowship of artisans and dreamers</p>
             </div>
-            
+
             <form action="/post" method="post">
-                <div class="form-container">
-                    <div class="form-section">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" placeholder="Enter Your Name" class="vintage-input" required>
+                <div class="flex flex-wrap gap-8">
+                    <!-- Form Section -->
+                    <div class="flex-1 min-w-[300px]">
+                        <!-- Name Field -->
+                        <div class="mb-6 relative">
+                            <label for="name"
+                                class="block font-cinzel text-lg mb-2 text-vintage-dark tracking-wide">Name</label>
+                            <input type="text" id="name" name="name" placeholder="Enter Your Name"
+                                class="w-full px-4 py-3 border-2 border-vintage-border bg-vintage-input font-cormorant text-lg text-vintage-text rounded-sm transition-all duration-300 shadow-inner focus:outline-none focus:border-vintage-brown focus:shadow-lg focus:shadow-vintage-brown focus:shadow-opacity-30 focus:bg-white placeholder-opacity-70 placeholder-italic"
+                                required>
                         </div>
-                        
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" placeholder="Enter Your email" class="vintage-input" required>
+
+                        <!-- Email Field -->
+                        <div class="mb-6 relative">
+                            <label for="email"
+                                class="block font-cinzel text-lg mb-2 text-vintage-dark tracking-wide">Email</label>
+                            <input type="email" id="email" name="email" placeholder="Enter Your email"
+                                class="w-full px-4 py-3 border-2 border-vintage-border bg-vintage-input font-cormorant text-lg text-vintage-text rounded-sm transition-all duration-300 shadow-inner focus:outline-none focus:border-vintage-brown focus:shadow-lg focus:shadow-vintage-brown focus:shadow-opacity-30 focus:bg-white placeholder-opacity-70 placeholder-italic"
+                                required>
                         </div>
-                        
-                        <div class="form-group">
-                            <label for="password">Password*</label>
-                            <input type="password" id="password" name="password" placeholder="Create a Password" class="vintage-input" required>
+
+                        <!-- Password Field -->
+                        <div class="mb-6 relative">
+                            <label for="password"
+                                class="block font-cinzel text-lg mb-2 text-vintage-dark tracking-wide">Password*</label>
+                            <input type="password" id="password" name="password" placeholder="Create a Password"
+                                class="w-full px-4 py-3 border-2 border-vintage-border bg-vintage-input font-cormorant text-lg text-vintage-text rounded-sm transition-all duration-300 shadow-inner focus:outline-none focus:border-vintage-brown focus:shadow-lg focus:shadow-vintage-brown focus:shadow-opacity-30 focus:bg-white placeholder-opacity-70 placeholder-italic"
+                                required>
                         </div>
-                        
-                        <button type="submit" class="vintage-button" id="signup">Sign up</button>
-                        
-                        <div id="message" class="mt-4 p-3 rounded-md hidden"></div>
-                        
-                        <div class="vintage-footer">
-                            Already have an account? <b><u><a href="../../index.html" style="color: inherit; text-decoration: none;">Log in</a></u></b>
+
+                        <!-- Submit Button -->
+                        <button type="submit" id="signup"
+                            class="vintage-button-shimmer relative w-full px-4 py-4 bg-gradient-to-b from-vintage-brown to-vintage-dark border-none text-vintage-paper font-cinzel text-xl tracking-wide rounded-sm cursor-pointer transition-all duration-300 shadow-md hover:from-amber-800 hover:to-red-900 hover:shadow-lg overflow-hidden">
+                            Sign up
+                        </button>
+
+                        <!-- Message Display -->
+                        <div id="message" class="hidden mt-6 p-4 rounded-sm text-center text-lg"></div>
+
+                        <!-- Footer -->
+                        <div
+                            class="text-center mt-8 p-4 bg-vintage-border bg-opacity-30 border-t border-vintage-border text-lg rounded-sm">
+                            Already have an account?
+                            <strong>
+                                <u
+                                    class="border-b border-vintage-brown cursor-pointer transition-all duration-300 hover:text-vintage-brown hover:border-b-2">
+                                    <a href="../../index.html" class="text-vintage-dark no-underline">Log in</a>
+                                </u>
+                            </strong>
                         </div>
                     </div>
-                    
-                    <div class="image-section">
-                        <div class="vintage-image">
-                            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Vintage landscape">
+
+                    <!-- Image Section -->
+                    <div
+                        class="flex-1 min-w-[300px] border-l border-vintage-border pl-8 flex flex-col justify-center md:border-l md:pl-8 max-md:border-l-0 max-md:border-t max-md:pt-8 max-md:pl-0">
+                        <div
+                            class="vintage-image-overlay vintage-image-pattern relative w-full h-96 border-8 border-double border-vintage-brown rounded-sm overflow-hidden shadow-lg max-md:h-72">
+                            <img src="../../public/assets/books/bgimages/scenery.jpg"
+                                alt="Vintage landscape"
+                                class="w-full h-full">
                         </div>
-                        <p class="text-center mt-4 italic text-[#6d4c3d]">"Where the spirit does not work with the hand, there is no art." - Leonardo da Vinci</p>
+                        <p class="text-center mt-4 italic text-vintage-muted">
+                            "Where the spirit does not work with the hand, there is no art." - Leonardo da Vinci
+                        </p>
                     </div>
                 </div>
             </form>
@@ -351,55 +203,10 @@
     </div>
 
     <script>
-        document.getElementById('signup').closest('form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const form = this;
-            const formData = new FormData(form);
-            const messageDiv = document.getElementById('message');
-            
-            // Show loading state
-            const submitBtn = document.getElementById('signup');
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Signing up...';
-            submitBtn.disabled = true;
-            
-            // Convert FormData to URLSearchParams for form submission
-            const data = new URLSearchParams();
-            for (const [key, value] of formData) {
-                data.append(key, value);
-            }
-            
-            fetch('/post', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: data
-            })
-            .then(response => {
-                if (response.ok) {
-                    return response.text();
-                } else {
-                    return response.text().then(text => Promise.reject(text));
-                }
-            })
-            .then(data => {
-                messageDiv.className = 'success';
-                messageDiv.textContent = data;
-                messageDiv.style.display = 'block';
-                form.reset();
-            })
-            .catch(error => {
-                messageDiv.className = 'error';
-                messageDiv.textContent = 'Error: ' + error;
-                messageDiv.style.display = 'block';
-            })
-            .finally(() => {
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            });
-        });
+
+
+
     </script>
 </body>
+
 </html>
