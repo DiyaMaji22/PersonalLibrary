@@ -1,2 +1,55 @@
 @import "tailwindcss";
-@import "tailwindcss";
+
+/* Custom CSS Variables */
+:root {
+  --color-vintage-dark: #1a1a1a;
+  --color-vintage-light: #d9c7a6;
+  --color-vintage-border: #3a2c2c;
+  --color-vintage-paper: #efebe9;
+  --color-mystery-dark: #0d0d0d;
+  --color-christie-blue: #2c3e50;
+  --color-bond-green: #2e7d32;
+  --color-rowling-purple: #5d4037;
+}
+
+/* Custom Utility Classes */
+.text-vintage-light { color: var(--color-vintage-light); }
+.text-vintage-dark { color: var(--color-vintage-dark); }
+.text-vintage-border { color: var(--color-vintage-border); }
+
+.bg-vintage-light { background-color: var(--color-vintage-light); }
+.bg-vintage-dark { background-color: var(--color-vintage-dark); }
+.bg-vintage-border { background-color: var(--color-vintage-border); }
+.bg-mystery-dark { background-color: var(--color-mystery-dark); }
+.bg-christie-blue { background-color: var(--color-christie-blue); }
+.bg-bond-green { background-color: var(--color-bond-green); }
+.bg-rowling-purple { background-color: var(--color-rowling-purple); }
+
+/* Border colors */
+.border-vintage-light { border-color: var(--color-vintage-light); }
+.border-vintage-dark { border-color: var(--color-vintage-dark); }
+.border-vintage-border { border-color: var(--color-vintage-border); }
+
+/* Custom Fonts */
+.font-cinzel { font-family: 'Cinzel', serif; }
+.font-crimson { font-family: 'Crimson Text', serif; }
+.font-playfair { font-family: 'Playfair Display', serif; }
+
+/* Custom Animations */
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-in;
+}
+
+.animate-spin-slow {
+  animation: spin 20s linear infinite;
+}
+
+/* Opacity variants for custom colors */
+.text-vintage-light\/70 { color: rgba(217, 199, 166, 0.7); }
+.text-vintage-light\/80 { color: rgba(217, 199, 166, 0.8); }
+.hover\:bg-vintage-border\/30:hover { background-color: rgba(58, 44, 44, 0.3); }
