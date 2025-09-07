@@ -8,7 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "start": "node src/index.js",
-    "server": "nodemon src/index.js"
+    "server": "nodemon src/index.js",
+    "build-css": "npm run build && Copy-Item dist/assets/index-*.css src/tailwind.css"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.13",
