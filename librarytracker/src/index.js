@@ -59,7 +59,7 @@ app.post('/submit', async (req,res) => {
         console.error('Error saving data:', error);
         res.status(500).json({ error: 'Failed to save data' });
     }
-    res.send("You are signed in");
+    
 });
 
 
