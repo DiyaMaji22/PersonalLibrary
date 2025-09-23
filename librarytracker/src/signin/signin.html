@@ -132,7 +132,7 @@
                 <p class="text-xl italic text-vintage-muted">Join our creative fellowship of artisans and dreamers</p>
             </div>
 
-            <form action="/submit" method="post">
+            <form action="/submit" method="post" id="form">
                 <div class="flex flex-wrap gap-8">
                     <!-- Form Section -->
                     <div class="flex-1 min-w-[300px]">
@@ -203,8 +203,59 @@
         </div>
     </div>
 
-   
-   
+    <script>
+        const form=document.getElementById('form');
+        const submit=document.getElementById('signup');
+       form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const messageDiv = document.getElementById('message');
+            submit.disabled = true;
+            submit.textContent = "Signing up...";
+            try {
+                const response = await fetch('/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name, email, password })
+                });
+                const result = await response.json();
+                if (result.success) {
+                    messageDiv.className = 'mt-6 p-4 rounded-sm text-center text-lg bg-green-100 border-2 border-green-400 text-green-700';
+                    messageDiv.textContent = result.message;
+                    messageDiv.classList.remove('hidden');
+                    alert(result.message + " Welcome to Vintage Library");
+                    form.reset();
+                    setTimeout(() => {
+                        window.location.href = "../../index.html";
+                    }, 1500);
+                } else {
+                    // Show error message
+                    messageDiv.className = 'mt-6 p-4 rounded-sm text-center text-lg bg-red-100 border-2 border-red-400 text-red-700';
+                    messageDiv.textContent = result.message;
+                    messageDiv.classList.remove('hidden');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                messageDiv.className = 'mt-6 p-4 rounded-sm text-center text-lg bg-red-100 border-2 border-red-400 text-red-700';
+                messageDiv.textContent = 'Network error. Please try again.';
+                messageDiv.classList.remove('hidden');
+            } finally {
+                
+                submit.disabled = false;
+                submit.textContent = 'Sign up';
+            }
+        });
+     
+        
+
+            
+
+  
+    </script>
 </body>
 
 </html>

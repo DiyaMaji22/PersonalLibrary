@@ -5,7 +5,7 @@ const userModel = require('./backend/model/user');
 const db = require('./backend/db/db');
 const app = express();
 
-// Connect to database
+
 db();
 
 app.set("view engine", "html");
@@ -24,22 +24,47 @@ app.get("/signin",(req,res)=>{
 })
 
 
-app.post('/', async (req, res) => {
+app.post('/submit', async (req, res) => {
     try {
         const { name, email, password } = req.body;
         console.log('Received form data:', { name, email });
         
+        
+        const existingUser = await userModel.findOne({ email });
+        if (existingUser) {
+            console.log("User already exists");
+            return res.status(400).json({
+                success: false,
+                message: 'User already exists with this email!'
+            });
+        }
+        
+        
         const newuser = await userModel.create({
-            username: name,  
+            username: name, 
             email: email,
             password: password,
         });
         
         console.log('User created successfully:', newuser._id);
-        res.send("User registered successfully!");
+        
+        
+        res.json({
+            success: true,
+            message: 'User successfully registered!',
+            redirectUrl: '/'
+        });
     } catch (error) {
         console.error('Registration error:', error);
-        res.status(500).send("Error registering user: " + error.message);
+        
+        let errorMessage = 'Error registering user. Please try again.';
+        
+        
+        
+        res.status(500).json({
+            success: false,
+            message: errorMessage
+        });
     }
 });
 
