@@ -1,69 +1,50 @@
-import express from 'express';
-import path from 'path';
-import bcrypt from 'bcrypt';
-import mongoose from 'mongoose';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
+require('dotenv').config();
+const express = require('express');
+const path = require('path');
+const userModel = require('./backend/model/user');
+const db = require('./backend/db/db');
 const app = express();
 
+// Connect to database
+db();
 
-app.use(express.json());
+app.set("view engine", "html");
+
+
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 
-app.use(express.static(path.join(__dirname, '../')));
-app.use('/src', express.static(path.join(__dirname, '../src')));
+app.use(express.static(path.join(__dirname,"..")));
+app.get('/',(req,res)=>{
+    res.sendFile(path.join(__dirname,"..",'index.html'));
+})
+app.get("/signin",(req,res)=>{
+    res.sendFile(path.join(__dirname,"..",'src','signin','signin.html'));
+})
+
+
+app.post('/', async (req, res) => {
+    try {
+        const { name, email, password } = req.body;
+        console.log('Received form data:', { name, email });
+        
+        const newuser = await userModel.create({
+            username: name,  
+            email: email,
+            password: password,
+        });
+        
+        console.log('User created successfully:', newuser._id);
+        res.send("User registered successfully!");
+    } catch (error) {
+        console.error('Registration error:', error);
+        res.status(500).send("Error registering user: " + error.message);
+    }
+});
+
 
 const port = 5000;
-
-app.use(express.static(path.join(__dirname,'public')))
-
-
-app.get('/',(req,res)=>{
-     res.sendFile(path.join(__dirname, "../index.html"));
-    });
-
-
-mongoose.connect('mongodb://localhost:27017/',{
-    useNewUrlParser:true,
-    useUnifiedTopology:true,
-
-}).then(()=>{
-    console.log("Mongo is connected");
-})
-const schema = mongoose.Schema;
-
-const dataschema = new schema({
-   name: { type: String },
-   email: { type: String },
-   password: { type: String }
-});
-
-const Data = mongoose.model('Data', dataschema);
-
-app.post('/submit', async (req,res) => {
-    try {
-        const {name, email, password} = req.body;
-        const newData = new Data({
-            name,
-            email,
-            password
-        });
-        await newData.save();
-        res.status(200).json({ message: 'Data saved successfully' });
-    } catch (error) {
-        console.error('Error saving data:', error);
-        res.status(500).json({ error: 'Failed to save data' });
-    }
-    
-});
-
-
 app.listen(port,()=>{
-    console.log(`Server running on port: ${port}`);
-
+    console.log(`Express Server on ${port}`);
 })
