@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vintage Login Form</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'cinzel': ['Cinzel', 'serif'],
+                        'cormorant': ['Cormorant Garamond', 'serif']
+                    },
+                    colors: {
+                        'vintage-cream': '#f5f1e6',
+                        'vintage-paper': '#f9f5eb',
+                        'vintage-brown': '#8b4513',
+                        'vintage-dark': '#5d2916',
+                        'vintage-text': '#3e352e',
+                        'vintage-border': '#d4c9ad',
+                        'vintage-muted': '#6d4c3d',
+                        'vintage-input': '#fcf9f3'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: #f5f1e6 url('../../public/assets/books/bgimages/bgm.jpg') no-repeat center center;
+            background-size: cover;
+        }
+
+        .vintage-card-pattern:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+           
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        .vintage-header-line:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 25%;
+            right: 25%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #822c0a, transparent);
+        }
+
+        .vintage-button-shimmer:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .vintage-button-shimmer:hover:before {
+            left: 100%;
+        }
+
+        .vintage-image-overlay:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 50%, rgba(139, 69, 19, 0.05) 50%);
+            pointer-events: none;
+        }
+
+        .vintage-image-pattern:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("");
+            pointer-events: none;
+        }
+        
+        .text-shadow-sm {
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body class="font-cormorant text-vintage-text leading-relaxed w-full min-h-screen overflow-auto">
+    <!-- Back Navigation -->
+    <div class="fixed top-5 left-5 z-50">
+        <a href="../../index.html"
+            class="flex items-center gap-2 px-4 py-3 bg-vintage-paper bg-opacity-95 border-2 border-vintage-brown rounded font-cinzel font-semibold text-vintage-dark no-underline transition-all duration-300 shadow-lg hover:bg-amber-100">
+            
+            Back to Library
+        </a>
+    </div>
+
+    <div class="max-w-6xl mx-auto my-8 p-4">
+        <div
+            class="vintage-card-pattern relative bg-vintage-paper border-8 border-double border-vintage-brown rounded shadow-2xl shadow-black shadow-opacity-10 overflow-hidden p-8 ">
+           
+            <i
+                class="fas fa-feather-alt absolute top-3 left-3 text-2xl text-vintage-brown opacity-20 transform -rotate-12"></i>
+            <i
+                class="fas fa-leaf absolute top-3 right-3 text-2xl text-vintage-brown opacity-20 transform rotate-12"></i>
+            <i
+                class="fas fa-feather absolute bottom-3 left-3 text-2xl text-vintage-brown opacity-20 transform rotate-12"></i>
+            <i
+                class="fas fa-seedling absolute bottom-3 right-3 text-2xl text-vintage-brown opacity-20 transform -rotate-12"></i>
+
+            <!-- Header -->
+            <div class="vintage-header-line relative text-center mb-8 pb-4">
+                <h1 class="font-cinzel text-4xl text-vintage-dark tracking-wide text-shadow-sm">Welcome Back</h1>
+                <p class="text-xl italic text-vintage-muted">Return to our creative fellowship of artisans and dreamers</p>
+            </div>
+
+            <form action="/login" method="post" id="loginForm">
+                <div class="flex flex-wrap gap-8">
+                    <!-- Form Section -->
+                    <div class="flex-1 min-w-[300px]">
+                        <!-- Email Field -->
+                        <div class="mb-6 relative">
+                            <label for="email"
+                                class="block font-cinzel text-lg mb-2 text-vintage-dark tracking-wide">Email</label>
+                            <input type="email" id="email" name="email" placeholder="Enter Your email"
+                                class="w-full px-4 py-3 border-2 border-vintage-border bg-vintage-input font-cormorant text-lg text-vintage-text rounded-sm transition-all duration-300 shadow-inner focus:outline-none focus:border-vintage-brown focus:shadow-lg focus:shadow-vintage-brown focus:shadow-opacity-30 focus:bg-white placeholder-opacity-70 placeholder-italic"
+                                required>
+                        </div>
+
+                        <!-- Password Field -->
+                        <div class="mb-6 relative">
+                            <label for="password"
+                                class="block font-cinzel text-lg mb-2 text-vintage-dark tracking-wide">Password</label>
+                            <input type="password" id="password" name="password" placeholder="Enter Your Password"
+                                class="w-full px-4 py-3 border-2 border-vintage-border bg-vintage-input font-cormorant text-lg text-vintage-text rounded-sm transition-all duration-300 shadow-inner focus:outline-none focus:border-vintage-brown focus:shadow-lg focus:shadow-vintage-brown focus:shadow-opacity-30 focus:bg-white placeholder-opacity-70 placeholder-italic"
+                                required>
+                        </div>
+                        
+                        <!-- Remember Me and Forgot Password -->
+                        <div class="flex justify-between items-center mb-6">
+                            <div class="flex items-center">
+                                <input type="checkbox" id="remember" name="remember" class="mr-2 h-4 w-4 text-vintage-brown rounded focus:ring-vintage-brown">
+                                <label for="remember" class="text-vintage-muted">Remember me</label>
+                            </div>
+                            <a href="#" class="text-vintage-brown hover:text-vintage-dark transition-colors duration-300 underline">Forgot password?</a>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" id="login"
+                            class="vintage-button-shimmer relative w-full px-4 py-4 bg-gradient-to-b from-vintage-brown to-vintage-dark border-none text-vintage-paper font-cinzel text-xl tracking-wide rounded-sm cursor-pointer transition-all duration-300 shadow-md hover:from-amber-800 hover:to-red-900 hover:shadow-lg overflow-hidden">
+                            Log In
+                        </button>
+
+                        <!-- Message Display -->
+                        <div id="message" class="hidden mt-6 p-4 rounded-sm text-center text-lg"></div>
+
+                        <!-- Footer -->
+                        <div
+                            class="text-center mt-8 p-4 bg-vintage-border bg-opacity-30 border-t border-vintage-border text-lg rounded-sm">
+                            Don't have an account?
+                            <strong>
+                                <u
+                                    class="border-b border-vintage-brown cursor-pointer transition-all duration-300 hover:text-vintage-brown hover:border-b-2">
+                                    <a href="./signin.html" class="text-vintage-dark no-underline">Sign up</a>
+                                </u>
+                            </strong>
+                        </div>
+                    </div>
+
+                    <!-- Image Section -->
+                    <div
+                        class="flex-1 min-w-[300px] border-l border-vintage-border pl-8 flex flex-col justify-center md:border-l md:pl-8 max-md:border-l-0 max-md:border-t max-md:pt-8 max-md:pl-0">
+                        <div
+                            class="vintage-image-overlay vintage-image-pattern relative w-full h-96 border-8 border-double border-vintage-brown rounded-sm overflow-hidden shadow-lg max-md:h-72">
+                            <img src="../../public/assets/books/bgimages/bg.jpg"
+                                alt="Vintage books and quill"
+                                class="w-full h-full object-cover grayscale-100">
+                        </div>
+                        <p class="text-center mt-4 italic text-vintage-muted">
+                            "The journey of a thousand pages begins with a single word." - Ancient Scribe's Proverb
+                        </p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const messageDiv = document.getElementById('message');
+            
+            
+            if (!email || !password) {
+                messageDiv.textContent = 'Please fill in all fields.';
+                messageDiv.className = 'mt-6 p-4 rounded-sm text-center text-lg bg-red-100 text-red-700 border border-red-300';
+                messageDiv.classList.remove('hidden');
+                return;
+            }
+            
+            
+            messageDiv.textContent = 'Welcome back! Redirecting to your library...';
+            messageDiv.className = 'mt-6 p-4 rounded-sm text-center text-lg bg-green-100 text-green-700 border border-green-300';
+            messageDiv.classList.remove('hidden');
+            
+           
+            setTimeout(() => {
+                window.location.href = '../../index.html';
+            }, 2000);
+        });
+    </script>
+</body>
+
+</html>

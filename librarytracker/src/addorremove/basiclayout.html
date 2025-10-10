@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vintage Book Collection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'vintage': {
+                            dark: '#1a1a1a',
+                            light: '#d9c7a6',
+                            border: '#3a2c2c',
+                            paper: '#efebe9',
+                        },
+                        'mystery': {
+                            dark: '#0d0d0d',
+                        },
+                        'christie': {
+                            blue: '#2c3e50',
+                        },
+                        'bond': {
+                            green: '#2e7d32',
+                        },
+                        'rowling': {
+                            purple: '#5d4037',
+                        }
+                    },
+                    fontFamily: {
+                        'cinzel': ['Cinzel', 'serif'],
+                        'crimson': ['Crimson Text', 'serif'],
+                        'playfair': ['Playfair Display', 'serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-image: url("../../public/assets/books/bgimages/bgm3.webp");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position:center;
+        }
+        .book-card {
+            transition: all 0.3s ease;
+        }
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(26, 26, 26, 0.2);
+        }
+        .vintage-border {
+            border: 1px solid #3a2c2c;
+            box-shadow: 0 4px 8px rgba(26, 26, 26, 0.1);
+        }
+        .page-turn {
+            transition: transform 0.5s ease;
+        }
+        .page-turn:hover {
+            transform: rotateY(10deg);
+        }
+    </style>
+</head>
+<body class="bg-vintage-paper font-crimson min-h-screen py-8 px-4">
+    <div class="max-w-6xl mx-auto">
+        <!-- Header -->
+        <header class="text-center mb-12 relative">
+            <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-vintage-border"></div>
+            <h1 class="text-4xl md:text-5xl font-bold text-vintage-dark font-cinzel mb-2 tracking-wide">The Mysterious Library</h1>
+            <p class="text-lg text-vintage-dark italic font-playfair">Curate your collection of literary treasures</p>
+            <div class="flex justify-center mt-4 space-x-2">
+                <span class="w-3 h-3 rounded-full bg-christie-blue"></span>
+                <span class="w-3 h-3 rounded-full bg-bond-green"></span>
+                <span class="w-3 h-3 rounded-full bg-rowling-purple"></span>
+            </div>
+            
+            
+            <div class="mt-6">
+                <a href="../../index.html" id="backToHome" class="inline-flex items-center text-vintage-dark hover:text-vintage-border transition-colors duration-300 font-playfair">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    Back to Home
+                </a>
+            </div>
+        </header>
+
+        <div class="flex flex-col lg:flex-row gap-8">
+            
+            <div class="lg:w-2/5">
+                <div class="bg-vintage-light vintage-border rounded-lg p-6 sticky top-8 page-turn">
+                    <h2 class="text-2xl font-bold text-vintage-dark mb-6 text-center font-cinzel tracking-wider">Add New Volume</h2>
+                    
+                    <form id="bookForm" class="space-y-4">
+                        <div>
+                            <label class="block text-vintage-dark font-semibold mb-1 font-playfair">Book Title</label>
+                            <input type="text" id="title" class="w-full px-4 py-2 bg-vintage-paper border border-vintage-border rounded focus:outline-none focus:ring-1 focus:ring-vintage-dark" placeholder="Enter book title" required>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-vintage-dark font-semibold mb-1 font-playfair">Author</label>
+                                <input type="text" id="author" class="w-full px-4 py-2 bg-vintage-paper border border-vintage-border rounded focus:outline-none focus:ring-1 focus:ring-vintage-dark" placeholder="Author name" required>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-vintage-dark font-semibold mb-1 font-playfair">Year Published</label>
+                                <input type="number" id="year" min="1000" max="2023" class="w-full px-4 py-2 bg-vintage-paper border border-vintage-border rounded focus:outline-none focus:ring-1 focus:ring-vintage-dark" placeholder="e.g., 1925">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-vintage-dark font-semibold mb-1 font-playfair">Genre</label>
+                            <select id="genre" class="w-full px-4 py-2 bg-vintage-paper border border-vintage-border rounded focus:outline-none focus:ring-1 focus:ring-vintage-dark">
+                                <option value="Mystery">Mystery</option>
+                                <option value="Classic">Classic</option>
+                                <option value="Fiction">Fiction</option>
+                                <option value="Non-Fiction">Non-Fiction</option>
+                                <option value="Science Fiction">Science Fiction</option>
+                                <option value="Fantasy">Fantasy</option>
+                                <option value="Romance">Romance</option>
+                                <option value="Historical">Historical</option>
+                                <option value="Biography">Biography</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-vintage-dark font-semibold mb-1 font-playfair">Description</label>
+                            <textarea id="description" rows="3" class="w-full px-4 py-2 bg-vintage-paper border border-vintage-border rounded focus:outline-none focus:ring-1 focus:ring-vintage-dark" placeholder="Brief description of the book"></textarea>
+                        </div>
+                        
+                        <button type="submit" id="submit" class="w-full bg-vintage-dark hover:bg-mystery-dark text-vintage-light font-semibold py-2 px-4 rounded transition duration-300 transform hover:-translate-y-1 font-playfair tracking-wide">
+                            Add to Collection
+                        </button>
+                    </form>
+                    
+                    <div class="mt-8 pt-6 border-t border-vintage-border border-dashed">
+                        <h3 class="text-lg font-bold text-vintage-dark mb-4 text-center font-cinzel">Collection Stats</h3>
+                        <div class="grid grid-cols-3 gap-4 text-center">
+                            <div class="bg-vintage-paper p-3 rounded vintage-border">
+                                <p class="text-2xl font-bold text-christie-blue" id="totalBooks">0</p>
+                                <p class="text-sm text-vintage-dark font-playfair">Total Books</p>
+                            </div>
+                            <div class="bg-vintage-paper p-3 rounded vintage-border">
+                                <p class="text-2xl font-bold text-bond-green" id="oldestBook">-</p>
+                                <p class="text-sm text-vintage-dark font-playfair">Oldest Book</p>
+                            </div>
+                            <div class="bg-vintage-paper p-3 rounded vintage-border">
+                                <p class="text-2xl font-bold text-rowling-purple" id="genresCount">0</p>
+                                <p class="text-sm text-vintage-dark font-playfair">Genres</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="lg:w-3/5">
+                <div class="mb-6 flex flex-col md:flex-row justify-between items-start md:items-center space-y-4 md:space-y-0">
+                    <h2 class="text-2xl font-bold text-vintage-dark font-cinzel tracking-wide">Your Collection</h2>
+                    <div class="flex space-x-4 w-full md:w-auto">
+                        <div class="relative flex-1 md:flex-none">
+                            <input type="text" id="searchInput" placeholder="Search books..." class="w-full pl-10 pr-4 py-2 bg-vintage-paper border border-vintage-border rounded focus:outline-none focus:ring-1 focus:ring-vintage-dark">
+                            <svg class="w-5 h-5 text-vintage-dark absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                        </div>
+                        <select id="genreFilter" class="bg-vintage-paper border border-vintage-border rounded px-4 py-2 focus:outline-none focus:ring-1 focus:ring-vintage-dark">
+                            <option value="all">All Genres</option>
+                            <option value="Mystery">Mystery</option>
+                            <option value="Classic">Classic</option>
+                            <option value="Fiction">Fiction</option>
+                            <option value="Non-Fiction">Non-Fiction</option>
+                            <option value="Science Fiction">Science Fiction</option>
+                            <option value="Fantasy">Fantasy</option>
+                            <option value="Romance">Romance</option>
+                            <option value="Historical">Historical</option>
+                            <option value="Biography">Biography</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div id="bookCollection" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <div class="col-span-full text-center py-12 text-vintage-dark italic font-playfair border-2 border-dashed border-vintage-border rounded-lg">
+                        <svg class="w-16 h-16 mx-auto text-vintage-border mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                        <p class="text-xl">Your collection awaits its first volume</p>
+                        <p class="mt-2">Add a book to begin your literary journey</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        
+        const submit=document.getElementById("submit");
+        const totalBooks=document.getElementById("totalBooks");
+        const oldestBook=document.getElementById("oldestBook");
+        const genreCount=document.getElementById("genreCount");
+        const searchInput=document.getElementById("searchInput");
+        const genreFilter=document.getElementById("genreFilter");
+        const bookCollection=document.getElementById("bookCollection");
+        
+
+        submit.addEventListener("submit",function(e){
+        const title=document.getElementById("title");
+        const author=document.getElementById("author");
+        const year=document.getElementById("year");
+        const genre=document.getElementById("genre");
+        const desc=document.getElementById("description");
+        e.preventDefault();
+        addBook();
+
+            
+        })
+        function addBook(){
+             
+
+        }
+        function removeBook(){
+
+        }
+        function filterbooks(){
+
+        }
+        function updatestats(){
+
+        }
+        function shownotification(){
+
+        }
+
+        
+    </script>
+</body>
+</html>
