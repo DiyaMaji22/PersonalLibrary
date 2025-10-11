@@ -134,9 +134,9 @@
 
             <form action="/submit" method="post" id="form">
                 <div class="flex flex-wrap gap-8">
-                    <!-- Form Section -->
+                    
                     <div class="flex-1 min-w-[300px]">
-                        <!-- Name Field -->
+                
                         <div class="mb-6 relative">
                             <label for="name"
                                 class="block font-cinzel text-lg mb-2 text-vintage-dark tracking-wide">Name</label>
@@ -145,7 +145,7 @@
                                 required>
                         </div>
 
-                        <!-- Email Field -->
+                        
                         <div class="mb-6 relative">
                             <label for="email"
                                 class="block font-cinzel text-lg mb-2 text-vintage-dark tracking-wide">Email</label>
@@ -154,7 +154,7 @@
                                 required>
                         </div>
 
-                        <!-- Password Field -->
+                        
                         <div class="mb-6 relative">
                             <label for="password"
                                 class="block font-cinzel text-lg mb-2 text-vintage-dark tracking-wide">Password*</label>
@@ -163,13 +163,13 @@
                                 required>
                         </div>
 
-                        <!-- Submit Button -->
+                        
                         <button type="submit" id="signup"
                             class="vintage-button-shimmer relative w-full px-4 py-4 bg-gradient-to-b from-vintage-brown to-vintage-dark border-none text-vintage-paper font-cinzel text-xl tracking-wide rounded-sm cursor-pointer transition-all duration-300 shadow-md hover:from-amber-800 hover:to-red-900 hover:shadow-lg overflow-hidden">
                             Sign up
                         </button>
 
-                        <!-- Message Display -->
+                       
                         <div id="message" class="hidden mt-6 p-4 rounded-sm text-center text-lg"></div>
 
                         <!-- Footer -->
@@ -233,7 +233,7 @@
                         window.location.href = "../../index.html";
                     }, 1500);
                 } else {
-                    // Show error message
+                    
                     messageDiv.className = 'mt-6 p-4 rounded-sm text-center text-lg bg-red-100 border-2 border-red-400 text-red-700';
                     messageDiv.textContent = result.message;
                     messageDiv.classList.remove('hidden');
