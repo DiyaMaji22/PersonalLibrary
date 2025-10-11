@@ -201,7 +201,7 @@
     </div>
 
     <script>
-       let books = [];
+        let books = [];
 const form = document.getElementById("bookForm");
 const submit = document.getElementById("submit");
 const totalBooksEl = document.getElementById("totalBooks"); 
@@ -213,8 +213,28 @@ const bookCollection = document.getElementById("bookCollection");
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    renderBooks();
-    updateStats();
+    // Load books from server
+    fetch('/api/books')
+        .then(r => r.json())
+        .then(result => {
+            if (result.success) {
+                books = result.data.map(b => ({
+                    id: b._id,
+                    title: b.title,
+                    author: b.author,
+                    year: b.year,
+                    genre: b.genre,
+                    description: b.description
+                }));
+            }
+            renderBooks();
+            updateStats();
+        })
+        .catch(err => {
+            console.error('Failed to load books:', err);
+            renderBooks();
+            updateStats();
+        });
 });
 
 
@@ -237,30 +257,61 @@ function addBook() {
     const year = document.getElementById("year").value;
     const genre = document.getElementById("genre").value;
     const description = document.getElementById("description").value; 
-    const newbook = {
-        id: Date.now(),
-        title,
-        author,
-        year,
-        genre,
-        description 
-    };
-    
-    books.push(newbook);
-    renderBooks(); 
-    updateStats(); 
-    form.reset();
-    showNotification(`${title} has been added to your collection`); 
+    const payload = { title, author, year, genre, description };
+
+    fetch('/api/books', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+    })
+    .then(r => r.json())
+    .then(result => {
+        if (result.success && result.data) {
+            const b = result.data;
+            const newbook = {
+                id: b._id,
+                title: b.title,
+                author: b.author,
+                year: b.year,
+                genre: b.genre,
+                description: b.description
+            };
+            books.unshift(newbook);
+            renderBooks();
+            updateStats();
+            form.reset();
+            showNotification(`${title} has been added to your collection`);
+        } else {
+            showNotification('Failed to add book');
+        }
+    })
+    .catch(err => {
+        console.error('Error adding book:', err);
+        showNotification('Error adding book');
+    });
 }
 
 function removeBook(id) {
     const book = books.find(b => b.id === id);
-    if (confirm(`Are you sure you want to remove ${book.title} from your collection`)) {
-        books = books.filter(book => book.id !== id);
-        renderBooks();
-        updateStats(); 
-        showNotification(`${book.title} has been removed from your collection`); 
-    }
+    if (!book) return;
+    if (!confirm(`Are you sure you want to remove ${book.title} from your collection`)) return;
+
+    fetch(`/api/books/${id}`, { method: 'DELETE' })
+        .then(r => r.json())
+        .then(result => {
+            if (result.success) {
+                books = books.filter(b => b.id !== id);
+                renderBooks();
+                updateStats();
+                showNotification(`${book.title} has been removed from your collection`);
+            } else {
+                showNotification('Failed to remove book');
+            }
+        })
+        .catch(err => {
+            console.error('Error deleting book:', err);
+            showNotification('Error removing book');
+        });
 }
 
 function renderBooks(booksToRender = books) {
@@ -281,7 +332,7 @@ function renderBooks(booksToRender = books) {
         <div class="book-card bg-vintage-light vintage-border rounded-lg p-4 flex flex-col h-full">
             <div class="flex justify-between items-start mb-2">
                 <h3 class="text-xl font-bold text-vintage-dark font-cinzel truncate flex-1">${book.title}</h3>
-                <button onclick="removeBook(${book.id})" class="text-vintage-dark hover:text-vintage-border transition-colors ml-2">
+                <button onclick="removeBook('${book.id}')" class="text-vintage-dark hover:text-vintage-border transition-colors ml-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                     </svg>

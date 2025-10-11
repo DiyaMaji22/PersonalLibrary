@@ -5,7 +5,7 @@ const db = async () => {
         console.log('Trying to connect to mongodb');
         console.log('MongoDB URL:', process.env.MONGO_URL ? 'URL is set' : 'URL is not set');
         
-        await mongoose.connect(process.env.MONGO_URL);
+        await mongoose.connect('mongodb://0.0.0.0/LibraryTracker');
         console.log("Database is connected successfully!");
     } catch (error) {
         console.log("Database connection error:", error.message);
