@@ -186,13 +186,13 @@
     </div>
 
     <script>
-        // Global variables
+        
         let currentBookDescription = '';
         let isDescriptionExpanded = false;
 
         // Initialize the page
         document.addEventListener('DOMContentLoaded', function () {
-            // Load book data for "Murder on the Orient Express" by default
+            
             searchAndLoadBook('Murder on the Orient Express Agatha Christie');
             
             generateStars();
@@ -200,7 +200,7 @@
             setupBookSearch();
         });
 
-        // Setup book search functionality
+       
         function setupBookSearch() {
             const searchInput = document.getElementById('bookSearchInput');
             const searchBtn = document.getElementById('searchBtn');
@@ -331,10 +331,10 @@
             document.getElementById('pageCount').textContent = volumeInfo.pageCount ? `${volumeInfo.pageCount} pages` : 'Unknown pages';
             document.getElementById('publishDate').textContent = volumeInfo.publishedDate || 'Unknown date';
             
-            // Update genres
+            
             updateGenresFromAPI(volumeInfo.categories);
             
-            // Update author information
+            
             updateAuthorInformation(volumeInfo);
             
             // Regenerate interactive stars
@@ -345,7 +345,7 @@
             const authorName = volumeInfo.authors ? volumeInfo.authors[0] : 'Unknown Author';
             document.getElementById('authorNameFull').textContent = authorName;
             
-            // Try to fetch author biography from a simple source
+           
             fetchAuthorBiography(authorName, function(bio, bookCount) {
                 if (bio) {
                     document.getElementById('authorBio').textContent = bio;
@@ -357,7 +357,7 @@
         }
 
         function fetchAuthorBiography(authorName, callback) {
-            // For demo purposes, we'll use some predefined author information
+            
             const knownAuthors = {
                 'Agatha Christie': {
                     bio: 'Born in Torquay in 1890, Agatha Christie began writing during the First World War and wrote over 100 novels, plays and short story collections. She was still writing to great acclaim until her death, and her books have now sold over a billion copies in English and another billion in over 100 foreign languages. Yet Agatha Christie was always a very private person, and though Hercule Poirot and Miss Marple became household names, the Queen of Crime was a complete enigma to all but her closest friends.',
@@ -457,7 +457,7 @@
             }
         }
 
-        // Generate interactive rating stars
+        
         function generateStars() {
             const starContainer = document.getElementById('starRating');
             starContainer.innerHTML = '';
