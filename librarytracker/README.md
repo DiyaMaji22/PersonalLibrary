@@ -2,8 +2,6 @@
 
 <div align="center">
 
-![Vintage Library Banner](assets/icons/quill-drawing-a-line.png)
-
 *A beautifully designed vintage-themed digital library application that allows users to explore classic and modern literature from renowned authors.*
 
 [![Built with Vite](https://img.shields.io/badge/Built%20with-Vite-646CFF?style=flat&logo=vite&logoColor=white)](https://vitejs.dev/)
@@ -430,8 +428,6 @@ If you like this project, please give it a ⭐ on GitHub!
 ### 📚 Built with ❤️ for book lovers everywhere
 
 **[⬆ Back to Top](#-vintage-library---personal-library-tracker)**
-
-![Footer](assets/icons/feather.png)
 
 *Happy Reading! 📖*
 
