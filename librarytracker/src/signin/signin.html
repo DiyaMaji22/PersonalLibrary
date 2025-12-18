@@ -131,7 +131,7 @@
             <i
                 class="fas fa-seedling absolute bottom-3 right-3 text-2xl text-vintage-brown opacity-20 transform -rotate-12"></i>
 
-            <!-- Header -->
+           
             <div class="vintage-header-line relative text-center mb-8 pb-4">
                 <h1 class="font-cinzel text-4xl text-vintage-dark tracking-wide text-shadow-sm">Create Account</h1>
                 <p class="text-xl italic text-vintage-muted">Join our creative fellowship of artisans and dreamers</p>
@@ -177,7 +177,7 @@
                        
                         <div id="message" class="hidden mt-6 p-4 rounded-sm text-center text-lg"></div>
 
-                        <!-- Footer -->
+                       
                         <div
                             class="text-center mt-8 p-4 bg-vintage-border bg-opacity-30 border-t border-vintage-border text-lg rounded-sm">
                             Already have an account?
@@ -190,7 +190,7 @@
                         </div>
                     </div>
 
-                    <!-- Image Section -->
+                    
                     <div
                         class="flex-1 min-w-[300px] border-l border-vintage-border pl-8 flex flex-col justify-center md:border-l md:pl-8 max-md:border-l-0 max-md:border-t max-md:pt-8 max-md:pl-0">
                         <div
@@ -227,8 +227,23 @@
                     },
                     body: JSON.stringify({ name, email, password })
                 });
-                const result = await response.json();
-                if (result.success) {
+
+                console.log('Signup response status:', response.status, 'content-type:', response.headers.get('content-type'));
+
+                let result;
+                try {
+                    result = await response.json();
+                } catch (parseErr) {
+                   
+                    const text = await response.text().catch(() => '<unable to read body>');
+                    console.error('Failed to parse JSON from /submit response:', parseErr, '\nBody:', text);
+                    messageDiv.className = 'mt-6 p-4 rounded-sm text-center text-lg bg-yellow-100 border-2 border-yellow-400 text-yellow-700';
+                    messageDiv.textContent = 'Received unexpected response from server. Check server logs.';
+                    messageDiv.classList.remove('hidden');
+                    return;
+                }
+
+                if (response.ok && result && result.success) {
                     messageDiv.className = 'mt-6 p-4 rounded-sm text-center text-lg bg-green-100 border-2 border-green-400 text-green-700';
                     messageDiv.textContent = result.message;
                     messageDiv.classList.remove('hidden');
@@ -239,17 +254,18 @@
                     }, 1500);
                 } else {
                     
+                    const msg = (result && result.message) ? result.message : 'Signup failed. Please try again.';
                     messageDiv.className = 'mt-6 p-4 rounded-sm text-center text-lg bg-red-100 border-2 border-red-400 text-red-700';
-                    messageDiv.textContent = result.message;
+                    messageDiv.textContent = msg;
                     messageDiv.classList.remove('hidden');
                 }
             } catch (error) {
-                console.error('Error:', error);
-                messageDiv.className = 'mt-6 p-4 rounded-sm text-center text-lg bg-red-100 border-2 border-red-400 text-red-700';
-                messageDiv.textContent = 'Network error. Please try again.';
-                messageDiv.classList.remove('hidden');
-            } finally {
                 
+                console.error('Network/Fetch error during signup:', error);
+                if (!messageDiv.classList.contains('hidden')) {
+                    messageDiv.classList.add('hidden');
+                }
+            } finally {
                 submit.disabled = false;
                 submit.textContent = 'Sign up';
             }
